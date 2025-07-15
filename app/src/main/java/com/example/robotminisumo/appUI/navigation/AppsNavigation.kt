@@ -20,6 +20,21 @@ fun AppsNavigation() {
         composable(AppsView.LoginView.name) {
             LoginView(navController = navController)
         }
+        composable(AppsView.AutonomoView.name) {
+            LoginView(navController = navController)
+        }
+        composable(AppsView.LoaderView.name) {
+            LoginView(navController = navController)
+        }
+        composable(AppsView.ManualView.name) {
+            LoginView(navController = navController)
+        }
+        composable(AppsView.MenuView.name) {
+            LoginView(navController = navController)
+        }
+        composable(AppsView.RegisterView.name) {
+            LoginView(navController = navController)
+        }
     }
 
 }

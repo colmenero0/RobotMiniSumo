@@ -13,60 +13,57 @@ import androidx.navigation.NavController
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun LoginView(
-    navController: NavController?,)
-{
-    var username by remember { mutableStateOf("") }
+fun LoginView(navController: NavController?) {
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
+    var loginResult by remember { mutableStateOf("") }
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+        Text("Iniciar sesión", style = MaterialTheme.typography.headlineMedium)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Correo electrónico") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Contraseña") },
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = {
+                loginUser(email, password) { success ->
+                    loginResult = if (success) "Inicio de sesión exitoso" else "Correo o contraseña incorrectos"
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Iniciar sesión", style = typography.headlineMedium)
-            Spacer(modifier = Modifier.height(32.dp))
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Usuario") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Text("Iniciar sesión")
+        }
+
+        if (loginResult.isNotEmpty()) {
             Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Contraseña") },
-                singleLine = true,
-                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-//                    val icon = if (passwordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility
-                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
-//                        Icon(imageVector = icon, contentDescription = null)
-                    }
-                },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(32.dp))
-            Button(
-                onClick = {
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Iniciar sesión")
-            }
+            Text(loginResult)
         }
     }
 }
+
 @Composable
 @Preview(showBackground = true, name = "X990", device = "spec:width=360dp,height=640dp,dpi=320")
 fun LoginViewPreview() {
