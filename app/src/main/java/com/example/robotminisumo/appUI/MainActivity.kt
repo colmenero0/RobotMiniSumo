@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import com.example.robotminisumo.appUI.app.view.register.RegisterViewPreview
 import com.example.robotminisumo.ui.theme.RobotMiniSumoTheme
 import mx.com.robotminisumo.appUI.navigation.AppsNavigation
 
@@ -20,7 +19,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(content: @Composable () -> Unit) {
     RobotMiniSumoTheme {
-//        AppsNavigation()
-        RegisterViewPreview()
+        AppsNavigation()
+//        RegisterViewPreview()
+//        LoginViewPreview()
     }
 }

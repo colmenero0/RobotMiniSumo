@@ -11,12 +11,10 @@ fun sendRegisterData(name: String, email: String, password: String, onResult: (S
             connection.requestMethod = "POST"
             connection.doOutput = true
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
-
             val postData = "name=$name&email=$email&password=$password"
             connection.outputStream.use {
                 it.write(postData.toByteArray())
             }
-
             val response = connection.inputStream.bufferedReader().readText().trim()
             onResult(
                 when (response) {
