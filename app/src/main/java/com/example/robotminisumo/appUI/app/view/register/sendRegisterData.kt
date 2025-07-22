@@ -6,7 +6,7 @@ import java.net.URL
 fun sendRegisterData(name: String, email: String, password: String, onResult: (String) -> Unit) {
     Thread {
         try {
-            val url = URL("http://192.168.0.4/robotminisumo/register.php")
+            val url = URL("http://172.20.4.36/robotminisumo/register.php") //internet UCAD Alumnos
             val connection = url.openConnection() as HttpURLConnection
             connection.requestMethod = "POST"
             connection.doOutput = true

@@ -6,7 +6,7 @@ import java.net.URLEncoder
 fun loginUser(email: String, password: String, onResult: (Boolean) -> Unit) {
     CoroutineScope(Dispatchers.IO).launch {
         try {
-            val url = URL("http://192.168.0.4/robotminisumo/login.php")
+            val url = URL("http://172.20.4.36/robotminisumo/login.php") //internet UCAD Alumnos
             val connection = url.openConnection() as HttpURLConnection
             connection.requestMethod = "POST"
             connection.doOutput = true
